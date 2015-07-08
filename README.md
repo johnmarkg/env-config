@@ -4,10 +4,16 @@ If config files are elsewhere, they can be specified on the command line using `
 
 Configuration values can be grouped together using a prefix and plucked out individually.
 
+See [node-env-configuration](https://github.com/whynotsoluciones/node-env-configuration) for info on structuring config.env
+
+
 # Usage
 
-config.env:
 ```
+#
+# config.env:
+#
+
 # db configs
 DB_VAR1=true
 DB_VAR2=false
@@ -16,28 +22,66 @@ DB_VAR2=false
 REDIS_VAR1=true
 REDIS_VAR2=false
 
-# another group of configs
+# app1
 APP1_VAR1=1
-APP2_VAR2=2
+APP1_VAR2=2
+
+# app2
+APP2_VAR1=3
 
 ```
 
+```
+#
+# config2.env:
+#
+
+# override a config value
+APP1_VAR2=100
+```
+
+
 
 ```
+//
+// app.js
+//
+
 var config = require('env-config')
 
-// pluck out configs for app1
-config.get('app1')
+// pluck out configs for app1 and app2
+config
+	.get('app1')
+	.get('app2')
 
-// we can now use the configs for app1
+// we can now use the configs for app1 and app2
 console.info(config.app1)
-
-// output:
-//
-// {
-// 	var1: 1,
-// 	var2: 2
-// }
-
+console.info(config.app2)
 ```
+
+Use the default config only
+```
+~ node app.js
+{
+	var1: 1,
+	var2: 2
+}
+{
+	var1: 3
+}
+```
+
+
+Override some config using the CONFIG env
+```
+~ CONFIG=./config2.env node app.js
+{
+	var1: 1,
+	var2: 100
+}
+{
+	var1: 3
+}
+```
+
 
