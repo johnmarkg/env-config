@@ -1,8 +1,8 @@
 {
-  "name": "config",
+  "name": "env-config",
   "version": "1.0.0",
-  "description": "Save ENV vars in file and turn into config object",
-  "main": "config.js",
+  "description": "Get config objects from ENV variables defined in config.env",
+  "main": "env-config.js",
   "scripts": {
     "test": "make test"
   },
