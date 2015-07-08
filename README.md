@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/<account>/<repository>/badge.svg?branch=master)](https://coveralls.io/r/<account>/<repository>?branch=master)
+
 Get config objects from ENV variables defined in `config.env`.  This module will search for `config.env` in current directory and bubble down to root.  
 
 If config files are elsewhere, they can be specified on the command line using `CONFIG=fullpath1;fullpath2 node app.js`.  These files will override any configs in default `config.env`, if it exists.

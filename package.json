@@ -4,9 +4,9 @@
   "description": "Get config objects from ENV variables defined in config.env",
   "main": "env-config.js",
   "scripts": {
-    "test": "make test",
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- test/*.js -R spec"
-  },
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+  },  
   "pre-commit": [
     "test"
   ],
@@ -22,6 +22,8 @@
     "node-env-file": "^0.1.7"
   },
   "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.17",
     "make-lint": "^1.0.1",
     "mocha": "^2.2.5",
     "pre-commit": "^1.0.10"
