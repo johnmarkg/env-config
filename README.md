@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/johnmarkg/env-config.svg?branch=master)](https://travis-ci.org/johnmarkg/env-config)
 [![Coverage Status](https://coveralls.io/repos/johnmarkg/env-config/badge.svg?branch=master)](https://coveralls.io/r/<account>/<repository>?branch=master)
 
 Get config objects from ENV variables defined in `config.env`.  This module will search for `config.env` in current directory and bubble down to root.  
