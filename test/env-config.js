@@ -4,19 +4,19 @@
 
 	describe('errors', function(){
 		beforeEach(function(){
-    		delete require.cache[require.resolve('../env-config')];
+    		delete require.cache[require.resolve('../index')];
     	});
 
     	it('nonexistent default config file',function(){
     		assert.throws(function(){
-    			var config = require('../env-config');
+    			var config = require('../index');
     		}, /no config file found/)
     	});
 
     	it('nonexistent files from CONFIG',function(){
     		process.env.CONFIG='nonexistentfile1;nonexistentfile2'
     		assert.throws(function(){
-    			var config = require('../env-config');
+    			var config = require('../index');
     		}, /no config file found/)
     	});
 	});
@@ -33,8 +33,8 @@
     	});
 
     	beforeEach(function(){
-    		delete require.cache[require.resolve('../env-config')];
-    		config = require('../env-config');
+    		delete require.cache[require.resolve('../index')];
+    		config = require('../index');
     	})
 
 
@@ -93,12 +93,12 @@
     	var config;
 
     	beforeEach(function(){
-    		delete require.cache[require.resolve('../env-config')];
+    		delete require.cache[require.resolve('../index')];
     	})
 
     	it('override', function(){
     		process.env.CONFIG='./config2.env';
-    		config = require('../env-config');
+    		config = require('../index');
     		config.get('app1')
     		assert.equal(config.app1.var1, 10);
 			assert.equal(config.app1.var2, false);
@@ -106,7 +106,7 @@
 
     	it('override multiple', function(){
     		process.env.CONFIG='./config2.env;./config3.env';
-    		config = require('../env-config');
+    		config = require('../index');
     		config.get('app1')
     		assert.equal(config.app1.var1, 10);
 			assert.equal(config.app1.var2, 100);
@@ -114,7 +114,7 @@
 
     	it('chain w/ override', function(){
     	 	process.env.CONFIG='./config2.env;./config3.env';
-    	 	config = require('../env-config');
+    	 	config = require('../index');
     		config
     			.get('app1')
     			.get('app2')
@@ -134,7 +134,7 @@
         });
 
         beforeEach(function(){
-            delete require.cache[require.resolve('../env-config')];
+            delete require.cache[require.resolve('../index')];
         });
 
         it('skip folder',function(){

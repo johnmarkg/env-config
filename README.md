@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/johnmarkg/env-config.svg?branch=master)](https://travis-ci.org/johnmarkg/env-config)
-[![Coverage Status](https://coveralls.io/repos/johnmarkg/env-config/badge.svg?branch=master)](https://coveralls.io/r/<account>/<repository>?branch=master)
+[![Build Status](https://travis-ci.org/johnmarkg/env-config-shared.svg?branch=master)](https://travis-ci.org/johnmarkg/env-config-shared)
+[![Coverage Status](https://coveralls.io/repos/johnmarkg/env-config-shared/badge.svg?branch=master)](https://coveralls.io/r/<account>/<repository>?branch=master)
 
 Get config objects from ENV variables defined in `config.env`.  This module will search for `config.env` in current directory and bubble down to root.  
 
@@ -7,7 +7,7 @@ If config files are elsewhere, they can be specified on the command line using `
 
 Configuration values can be grouped together using a prefix and plucked out individually.
 
-See [node-env-configuration](https://github.com/whynotsoluciones/node-env-configuration) for info on structuring config.env
+See [node-env-config-shareduration](https://github.com/whynotsoluciones/node-env-config-shareduration) for info on structuring config.env
 
 
 # Usage
@@ -50,7 +50,7 @@ APP1_VAR2=100
 // app.js
 //
 
-var config = require('env-config')
+var config = require('env-config-shared')
 
 // pluck out configs for app1 and app2
 config
