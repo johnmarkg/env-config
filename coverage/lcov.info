@@ -1,5 +1,5 @@
 TN:
-SF:/Users/mark/ipc/modules/env-config/env-config.js
+SF:/Users/mark/ipc/modules/env-config-shared/env-config.js
 FN:1,(anonymous_1)
 FN:8,EnvConfig
 FN:48,(anonymous_3)
@@ -41,7 +41,7 @@ DA:55,1
 DA:58,12
 DA:59,10
 DA:61,2
-DA:62,93
+DA:62,107
 DA:67,12
 DA:70,14
 DA:73,1

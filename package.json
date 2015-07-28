@@ -1,12 +1,12 @@
 {
-  "name": "env-config",
-  "version": "1.0.0",
-  "description": "Get config objects from ENV variables defined in config.env",
+  "name": "env-config-shared",
+  "version": "1.0.1",
+  "description": "Get config objects from ENV variables defined in shared config.env",
   "main": "env-config.js",
   "scripts": {
     "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
-  },  
+  },
   "pre-commit": [
     "test"
   ],

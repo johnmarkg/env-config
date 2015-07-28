@@ -138,13 +138,13 @@
         });
 
         it('skip folder',function(){
-            var config = require('../../env-config');
+            var config = require('../../env-config-shared');
             config.get('app1')
             assert.equal(config.app1.var1, true);                
         });
         it('skip folder, CONFIG env',function(){
             process.env.CONFIG='./config.env';
-            var config = require('../../env-config');
+            var config = require('../../env-config-shared');
             config.get('app1')
             assert.equal(config.app1.var1, true);                
         });
