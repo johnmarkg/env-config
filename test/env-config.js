@@ -21,15 +21,13 @@
     	});
 	});
 
-
-
     describe('config.get', function(){
     	var config;
 
     	// chdir to find config file in ./test
     	before(function(){
-    		process.chdir('test');		
-    		
+    		process.chdir('test');
+
     	});
 
     	beforeEach(function(){
@@ -54,7 +52,7 @@
     		config.get('app2')
     		assert.equal(config.app1, null);
     		assert.equal(config.app2.var1, 1);
-    		assert.equal(config.app2.var2, 2);    		
+    		assert.equal(config.app2.var2, 2);
     	});
 
     	it('app name can only to underscore', function(){
@@ -69,23 +67,23 @@
     		assert.equal(config.app1.var1, true);
     		assert.equal(config.app1.var2, false);
     		assert.equal(config.app2.var1, 1);
-    		assert.equal(config.app2.var2, 2);    		    		
+    		assert.equal(config.app2.var2, 2);
     	});
 
     	it('get with no appName', function(){
-    		config.get()	
-    		
+    		config.get()
+
     		assert.equal(config.app1, null);
     		assert.equal(config.app1Var1, true);
     		assert.equal(config.app2Var1, 1);
-    		assert.equal(config.app2Var2, 2);    		
+    		assert.equal(config.app2Var2, 2);
     	});
 
     	it('no namespace puts all env vars in to config object', function(){
     		process.env['DUMMY CONFIG']=1;
     		config.get()
-    		
-    		assert.equal(config.dummyConfig, 1); 
+
+    		assert.equal(config.dummyConfig, 1);
     	});
     });
 
@@ -120,9 +118,9 @@
     			.get('app2')
 
     		assert.equal(config.app1.var1, 10);
-			assert.equal(config.app1.var2, 100);    		
+			assert.equal(config.app1.var2, 100);
     		assert.equal(config.app2.var1, 1);
-    		assert.equal(config.app2.var2, true);    		    		
+    		assert.equal(config.app2.var2, true);
     	});
     });
 
@@ -130,7 +128,7 @@
     describe('config.env should not be folder', function(){
 
         before(function(){
-            process.chdir('dummy');      
+            process.chdir('dummy');
         });
 
         beforeEach(function(){
@@ -140,16 +138,42 @@
         it('skip folder',function(){
             var config = require('../../env-config-shared');
             config.get('app1')
-            assert.equal(config.app1.var1, true);                
+            assert.equal(config.app1.var1, true);
         });
         it('skip folder, CONFIG env',function(){
             process.env.CONFIG='./config.env';
             var config = require('../../env-config-shared');
             config.get('app1')
-            assert.equal(config.app1.var1, true);                
+            assert.equal(config.app1.var1, true);
         });
 
-    });        
+    });
+
+    describe('config.getAll', function(){
+        var config;
+
+    	// chdir to find config file in ./test
+    	before(function(){
+    		// process.chdir('./test');
+
+    	});
+
+    	beforeEach(function(){
+    		delete require.cache[require.resolve('../index')];
+    		config = require('../index');
+    	})
+
+        it('getAll', function(){
+    		config.getAll()
+            // console.info(config)
+            assert.equal(config.app1.var1, true);
+    		assert.equal(config.app1.var2, false);
+    		assert.equal(config.app2.var1, 1);
+    		assert.equal(config.app2.var2, 2);
+    	});
+
+    })
 
 
-}).call(this);    
+
+}).call(this);

@@ -44,6 +44,29 @@
 		return this;
 	}
 
+	EnvConfig.prototype.getAll = function() {
+
+		var t = this
+		var appNames = {};
+
+		this.configFiles.forEach(function(f){
+
+			var lines = fs.readFileSync(f, 'utf8')
+
+			lines.split("\n").forEach(function(l){
+				if(!l){ return; }
+				var name = l.replace(/^([a-z0-9]+)[\=\_].*/i, "$1").toLowerCase().trim()
+
+				appNames[name] = true
+			})
+		})
+
+		Object.keys(appNames).forEach(function(app){
+			t.get(app)
+		})
+		return this;
+	}
+
 	// add config for appName to config object
 	EnvConfig.prototype.get = function(appName, label) {
 		if (!appName) {
