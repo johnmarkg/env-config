@@ -1,6 +1,6 @@
 {
   "name": "env-config-shared",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Get config objects from ENV variables defined in shared config.env",
   "main": "index.js",
   "scripts": {
