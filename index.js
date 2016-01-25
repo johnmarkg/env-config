@@ -17,7 +17,7 @@
 
 		// get config files from env
 		if (process.env.CONFIG) {
-			var split = process.env.CONFIG.split(';')
+			var split = process.env.CONFIG.split(',')
 			for (var i in split) {
 				try {
 					var stat = fs.statSync(split[i]);

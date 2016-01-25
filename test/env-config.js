@@ -103,7 +103,7 @@
     	});
 
     	it('override multiple', function(){
-    		process.env.CONFIG='./config2.env;./config3.env';
+    		process.env.CONFIG='./config2.env,./config3.env';
     		config = require('../index');
     		config.get('app1')
     		assert.equal(config.app1.var1, 10);
@@ -111,7 +111,7 @@
     	});
 
     	it('chain w/ override', function(){
-    	 	process.env.CONFIG='./config2.env;./config3.env';
+    	 	process.env.CONFIG='./config2.env,./config3.env';
     	 	config = require('../index');
     		config
     			.get('app1')
