@@ -6,6 +6,9 @@
 		beforeEach(function(){
     		delete require.cache[require.resolve('../index')];
     	});
+        after(function(){
+            delete process.env.CONFIG
+        })
 
     	it('nonexistent default config file',function(){
     		assert.throws(function(){
@@ -14,11 +17,13 @@
     	});
 
     	it('nonexistent files from CONFIG',function(){
-    		process.env.CONFIG='nonexistentfile1;nonexistentfile2'
+    		process.env.CONFIG='nonexistentfile1,nonexistentfile2'
     		assert.throws(function(){
     			var config = require('../index');
+
     		}, /no config file found/)
     	});
+        
 	});
 
     describe('config.get', function(){
@@ -27,7 +32,6 @@
     	// chdir to find config file in ./test
     	before(function(){
     		process.chdir('test');
-
     	});
 
     	beforeEach(function(){
@@ -171,6 +175,53 @@
     		assert.equal(config.app2.var1, 1);
     		assert.equal(config.app2.var2, 2);
     	});
+
+    })
+
+    describe('process.env.CONFIG is a dir', function(){
+        // process.env.CONFIG='./config';
+        var config;
+
+    	// chdir to find config file in ./test
+    	before(function(){
+    		process.chdir('../');
+    	});
+
+    	beforeEach(function(){
+    		delete require.cache[require.resolve('../index')];
+    		// config = require('../index');
+    	})
+
+        // it('nonexistent default config file',function(){
+    	// 	assert.throws(function(){
+    	// 		var config = require('../index');
+    	// 	}, /no config file found/)
+    	// });
+
+
+
+        it('with config.env', function(){
+            // process.chdir('../');
+    		process.env.CONFIG='./config';
+    		config = require('../index');
+    		config.getAll()
+            // console.info(config)
+            assert(config.app1.var1)
+    		assert.equal(config.dir.env1, 1);
+			assert.equal(config.dir.env2, 2);
+    	});
+        it('without config.env', function(){
+            process.chdir('../');
+    		process.env.CONFIG='test/config';
+    		config = require('../index');
+
+    		config.getAll()
+            assert(!config.app1)
+    		assert.equal(config.dir.env1, 1);
+			assert.equal(config.dir.env2, 2);
+    	});
+
+
 
     })
 

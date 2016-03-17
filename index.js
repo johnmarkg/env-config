@@ -8,6 +8,7 @@
 	function EnvConfig() {
 
 		this.configFiles = [];
+		var t = this;
 
 		// look for default config file
 		var mainEnvConfig = findEnvFile('config.env')
@@ -19,19 +20,46 @@
 		if (process.env.CONFIG) {
 			var split = process.env.CONFIG.split(',')
 			for (var i in split) {
+				var fileOrDir = split[i]
 				try {
-					var stat = fs.statSync(split[i]);
+					var stat = fs.statSync(fileOrDir);
 
-					if (stat && stat.isFile()) {
-						this.configFiles.push(split[i]);
+					if (stat.isFile()) {
+						this.configFiles.push(fileOrDir);
 					}
-				} catch (err) {}
+					else if(stat.isDirectory()){
+
+						fs.readdirSync(fileOrDir)
+							.sort(function(a, b) {
+								return a < b ? -1 : 1;
+							})
+							.forEach(function(f){
+								f = path.resolve(path.join(fileOrDir, f));
+								if(f.match(/\.env$/)){
+
+									var _stat = fs.statSync(f);
+									if (_stat.isFile()) {
+										t.configFiles.push(f);
+									}
+									else{
+										return
+									}
+
+								}
+							})
+					}
+					else{
+						console.error('env-config-shared: process.env.CONFIG file not a file or directory' + fileOrDir)
+					}
+				} catch (err) {
+					console.error('env-config-shared: env file not a file: ' + fileOrDir)
+				}
 			}
 		}
 
 		// need at least one config file
 		if (this.configFiles.length === 0) {
-			throw new Error('no config file found, create config.env in current dir or lower, or set ENV var CONFIG=file1;file2');
+			throw new Error('env-config-shared: no config file found, create config.env in current dir or lower, or set ENV var CONFIG=file1;file2');
 		}
 
 		// process files and put into process.env
@@ -91,7 +119,6 @@
 	};
 
 	module.exports = new EnvConfig();
-	// module.exports = EnvConfig;
 
 	function findEnvFile(envFilename) {
 
